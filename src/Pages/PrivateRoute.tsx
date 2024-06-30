@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { auth } from '../firebase';
+import { useAuth } from '../hooks/useAuth';
 
 const PrivateRoute: React.FC = () => {
-  const isAuthenticated: boolean = auth.currentUser?.displayName ? true : false;
-
+  const auth = useAuth();
+  const isAuthenticated: boolean = auth.currentUser?.email ? true : false;
   if (!isAuthenticated) {
     return <Navigate to="/signin" replace />;
   }

@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { auth } from '../firebase';
+import { useAuth } from '../hooks/useAuth';
 
 function PublicRoute() {
-    const isAuthenticated: boolean = auth.currentUser?.displayName ? true : false;
+    const auth = useAuth();
+    const isAuthenticated: boolean = auth.currentUser?.email ? true : false;
 
     if (isAuthenticated) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/my-portfolio" replace />;
     }
 
     return <Outlet />;
